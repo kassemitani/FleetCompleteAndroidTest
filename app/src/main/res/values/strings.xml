@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FleetComplete</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_item_list">Vehicles</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_api_key">Enter API key</string>
+    <string name="api_key">API key</string>
+    <string name="date">Date:</string>
+    <string name="location_history">Location history: %1$s</string>
+    <string name="start">Start</string>
+    <string name="end">End</string>
+</resources>
