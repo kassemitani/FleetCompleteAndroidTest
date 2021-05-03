@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RestApi{
     companion object {
+        var apiKey = ""
         fun vehiclesService() : Retrofit{
             return Retrofit.Builder()
                     .baseUrl(BuildConfig.SERVER_ADDRESS)

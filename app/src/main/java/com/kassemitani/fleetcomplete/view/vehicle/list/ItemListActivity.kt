@@ -45,7 +45,6 @@ class ItemListActivity : AppCompatActivity(), ListVehicleContract.View {
      * device.
      */
     private var twoPane: Boolean = false
-    private var apiKey : String = ""
     private lateinit var mPresenter : ListVehiclePresenter
     private var vehicleMutableList : MutableList<VehicleHistory> = mutableListOf()
     private lateinit var vehicleRecyclerViewAdapter: VehicleRecyclerViewAdapter
@@ -73,8 +72,8 @@ class ItemListActivity : AppCompatActivity(), ListVehicleContract.View {
         val service = RestApi.vehiclesService().create(VehiclesService::class.java)
         val vehicleRepository = VehicleRepository(service)
         mPresenter = ListVehiclePresenter(this, vehicleRepository, scheduler)
-        if (apiKey.isNotBlank()) {
-            mPresenter.getLastData(apiKey)
+        if (RestApi.apiKey.isNotBlank()) {
+            mPresenter.getLastData(RestApi.apiKey)
         }
 
         vehicleRecyclerViewAdapter = VehicleRecyclerViewAdapter(vehicleMutableList, this, twoPane)
@@ -91,7 +90,7 @@ class ItemListActivity : AppCompatActivity(), ListVehicleContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {//refresh Data
-                mPresenter.getLastData(apiKey)
+                mPresenter.getLastData(RestApi.apiKey)
                 true
             }
             R.id.key -> {
@@ -109,7 +108,7 @@ class ItemListActivity : AppCompatActivity(), ListVehicleContract.View {
         builder.setTitle(R.string.enter_api_key)
 
         val editText = TextInputEditText(this)
-        editText.setText(apiKey)
+        editText.setText(RestApi.apiKey)
         val constraintLayout = AlertDialogHelper.getEditTextLayout(this, editText)
         builder.setView(constraintLayout)
 
@@ -124,8 +123,8 @@ class ItemListActivity : AppCompatActivity(), ListVehicleContract.View {
     }
 
     private fun updateAPIkey(newApiKey: String) {
-        apiKey = newApiKey
-        mPresenter.getLastData(apiKey)
+        RestApi.apiKey = newApiKey
+        mPresenter.getLastData(RestApi.apiKey)
     }
 
     override fun displayLastData(dataList: List<VehicleHistory>) {

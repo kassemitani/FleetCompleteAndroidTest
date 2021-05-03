@@ -36,7 +36,6 @@ import java.util.*
 class ItemDetailFragment : Fragment(), OnMapReadyCallback, DetailVehicleContract.View {
 
     private var itemId: Int = 0
-    private var apiKey : String = "home.assignment.2-1230927"
     private lateinit var mPresenter : DetailVehiclePresenter
     private val onClickListener: View.OnClickListener
     private lateinit var googleMap: GoogleMap
@@ -99,7 +98,7 @@ class ItemDetailFragment : Fragment(), OnMapReadyCallback, DetailVehicleContract
     private fun updateDatePicker(date: Date = Date()) {
         tvDate.text = DateHelper.formatDateToString(date, "dd/MM/yyyy")
         itemId?.let {
-            mPresenter.getRawData(apiKey, itemId,date)
+            mPresenter.getRawData(RestApi.apiKey, itemId,date)
         }
     }
 
