@@ -114,11 +114,18 @@ class ItemListActivity : AppCompatActivity(), ListVehicleContract.View {
         builder.setView(constraintLayout)
 
         builder.setPositiveButton(getString(R.string.ok),
-            DialogInterface.OnClickListener { dialog, which -> apiKey = editText.text.toString() })
+            DialogInterface.OnClickListener {
+                dialog, which -> updateAPIkey(editText.text.toString())
+            })
         builder.setNegativeButton(getString(R.string.cancel),
             DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
 
         builder.show()
+    }
+
+    private fun updateAPIkey(newApiKey: String) {
+        apiKey = newApiKey
+        mPresenter.getLastData(apiKey)
     }
 
     override fun displayLastData(dataList: List<VehicleHistory>) {
